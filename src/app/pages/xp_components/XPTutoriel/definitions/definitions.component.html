@@ -1,0 +1,68 @@
+<div class="app-content">
+  <!-- Add Definition Button -->
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="openAddForm()">Add New Definition</button>
+  </div>
+
+  <!-- Add Definition Dialog as a Popup -->
+  <div class="popup-background" *ngIf="showAddForm">
+    <nb-card class="dialog-card popup-card">
+      <nb-card-header>Add New Definition</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="addForm" (ngSubmit)="saveNewDefinition()" class="edit-form">
+          <div class="form-group">
+            <label for="new-titre">Title</label>
+            <input nbInput fullWidth formControlName="titre" id="new-titre" placeholder="Title" />
+          </div>
+          <div class="form-group">
+            <label for="new-description">Description</label>
+            <textarea nbInput fullWidth formControlName="description" id="new-description" placeholder="Description"></textarea>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <button nbButton status="primary" size="small" type="submit">Save</button>
+            <button nbButton status="basic" size="small" type="button" (click)="closeDialog()">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <!-- Definitions List -->
+  <div class="col-md-12" *ngFor="let definition of definitions">
+    <nb-card size="small">
+      <nb-card-header>
+        <strong style="color: blue;">{{ definition.titre }}</strong>
+      </nb-card-header>
+      <nb-card-body>
+        <p class="ml-4 mt-4"><strong>{{ definition.description }}</strong></p>
+        <div class="d-flex justify-content-end mt-5">
+          <button nbButton size="small" (click)="openEditForm(definition)">Edit</button>
+          <button nbButton size="small" status="danger" (click)="deleteDefinition(definition.id)">Delete</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Edit Definition Dialog as a Popup -->
+    <div class="popup-background" *ngIf="showEditForm && editingDefinition?.id === definition.id">
+      <nb-card class="dialog-card popup-card">
+        <nb-card-header>Edit Definition</nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="editForm" (ngSubmit)="saveEditedDefinition()" class="edit-form">
+            <div class="form-group">
+              <label for="titre-{{definition.id}}">Title</label>
+              <input nbInput fullWidth formControlName="titre" id="titre-{{definition.id}}" placeholder="Title" />
+            </div>
+            <div class="form-group">
+              <label for="description-{{definition.id}}">Description</label>
+              <textarea nbInput fullWidth formControlName="description" id="description-{{definition.id}}" placeholder="Description"></textarea>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button nbButton status="primary" size="small" type="submit">Save</button>
+              <button nbButton status="basic" size="small" type="button" (click)="closeDialog()">Cancel</button>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

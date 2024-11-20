@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="iteration-selector">
+    <label for="iteration">Select Iteration:</label>
+    <select id="iteration" (change)="onIterationChange($event)">
+      <option *ngFor="let iteration of iterations" [value]="iteration.id">{{ iteration.title }}</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <!-- Card 1: Total Iterations -->
+    <div class="col-md-2 mb-3">
+      <nb-card class="dashboard-card card-blue">
+        <nb-card-header>
+          <nb-icon icon="bar-chart-outline" class="icon"></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="value">{{ totalIterations }}</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <!-- Card 2: User Stories Count -->
+    <div class="col-md-2 mb-3">
+      <nb-card class="dashboard-card card-green">
+        <nb-card-header>
+          <nb-icon icon="list-outline" class="icon"></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="value">{{ userStoriesCount }}</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <!-- Card 3: Iteration Duration -->
+    <div class="col-md-2 mb-3">
+      <nb-card class="dashboard-card card-yellow">
+        <nb-card-header>
+          <nb-icon icon="calendar-outline" class="icon"></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="value">{{ iterationDuration }}</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <!-- Card 4: Iteration Progress -->
+    <div class="col-md-2 mb-3">
+      <nb-card class="dashboard-card card-red">
+        <nb-card-header>
+          <nb-icon icon="clock-outline" class="icon"></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="value">{{ iterationProgress }}%</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <!-- Card 5: Iteration Overdue -->
+    <div class="col-md-2 mb-3">
+      <nb-card class="dashboard-card card-purple">
+        <nb-card-header>
+          <nb-icon icon="alert-circle-outline" class="icon"></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="value">{{ iterationOverdue ? 'Yes' : 'No' }}</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <div echarts [options]="chartprocessOptions" class="echart" style="height: 400px;"></div>
+
+</div>
+
+
+

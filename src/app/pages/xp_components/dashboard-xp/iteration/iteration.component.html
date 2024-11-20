@@ -1,0 +1,147 @@
+<div class="iterations-section">
+  <h1>Iterations</h1>
+  <div class="button-container">
+    <button nbButton size="small" status="success" (click)="openAddIterationDialog()">Add Iteration</button>
+  </div>
+  <div *ngIf="alertMessage" [ngClass]="alertClass" class="alert">
+    {{ alertMessage }}
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th></th> <!-- Icon column -->
+          <th>Name</th>
+          <th>Description</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let iteration of iterations">
+          <tr>
+            <td>
+              <button nbButton ghost (click)="toggleUserStories(iteration)">
+                <nb-icon [icon]="iteration.showUserStories ? 'arrowhead-up-outline' : 'arrowhead-down-outline'"></nb-icon>
+              </button>
+            </td>
+            <td>{{ iteration.title }}</td>
+            <td>{{ iteration.description }}</td>
+            <td>{{ iteration.startDate | date }}</td>
+            <td>{{ iteration.endDate | date }}</td>
+            <td>
+              <button nbButton status="success" (click)="viewIteration(iteration)">View</button>
+              <button nbButton status="danger" (click)="deleteIteration(iteration.id!)">Delete</button>
+              <button nbButton status="info" (click)="openUpdateIterationDialog(iteration)">Update</button>
+            </td>
+          </tr>
+          <tr *ngIf="iteration.showUserStories">
+            <td colspan="6">
+              <h4>User Stories:</h4>
+              <ng-container *ngIf="iteration.loading">
+                <nb-spinner></nb-spinner> Loading...
+              </ng-container>
+              <ul *ngIf="!iteration.loading">
+                <li *ngFor="let story of iteration.userStories">{{ story.title }}</li>
+              </ul>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Alert Display -->
+<div class="alert-container" *ngIf="showAlert">
+  <nb-alert [status]="alertStatus">
+    <strong>{{ alertMessage }}</strong>
+  </nb-alert>
+</div>
+
+
+<!-- Add/Edit Iteration Dialog (Inline) -->
+<div *ngIf="showDialog" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <span class="dialog-title">{{ isAddingIteration ? 'Add New Iteration' : 'Iteration Details' }}</span>
+      <button class="close-button" (click)="closeDialog()">&times;</button>
+    </div>
+    <div class="dialog-body">
+      <form *ngIf="isAddingIteration; else detailsTemplate" (ngSubmit)="addIteration()">
+        <div>
+          <label>Name:</label>
+          <input class="styled-input" nbInput [(ngModel)]="newIteration.title" name="name" required>
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea class="styled-input" nbInput [(ngModel)]="newIteration.description" name="description"></textarea>
+        </div>
+        <div>
+          <label>Start Date:</label>
+          <input class="styled-input" nbInput type="date" [(ngModel)]="newIteration.startDate" name="startDate" required>
+        </div>
+        <div>
+          <label>End Date:</label>
+          <input class="styled-input" nbInput type="date" [(ngModel)]="newIteration.endDate" name="endDate" required>
+        </div>
+        <div class="dialog-footer">
+          <button nbButton type="submit">Add Iteration</button>
+          <button nbButton type="button" (click)="closeDialog()">Cancel</button>
+        </div>
+      </form>
+      <ng-template #detailsTemplate>
+        <p><strong>Name:</strong> {{ selectedIteration?.title }}</p>
+        <p><strong>Description:</strong> {{ selectedIteration?.description }}</p>
+        <p><strong>Start Date:</strong> {{ selectedIteration?.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ selectedIteration?.endDate | date }}</p>
+
+        <div class="dialog-footer">
+          <button nbButton type="button" (click)="closeDialog()">Close</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- Update Iteration Dialog -->
+<!-- Existing code -->
+
+<!-- Update Iteration Dialog -->
+<!-- Existing code -->
+
+<!-- Update Iteration Dialog -->
+<div *ngIf="updateDialog" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <span class="dialog-title">Update Iteration</span>
+      <button class="close-button" (click)="closeUpdateDialog()">&times;</button>
+    </div>
+    <div class="dialog-body">
+      <form (ngSubmit)="updateIterations()">
+        <div>
+          <label>title:</label>
+          <input class="styled-input" nbInput [(ngModel)]="updateIteration.title" name="title" required>
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea class="styled-input" nbInput [(ngModel)]="updateIteration.description" name="description"></textarea>
+        </div>
+        <div>
+          <label>Start Date:</label>
+          <input class="styled-input" nbInput type="date" [(ngModel)]="updateIteration.startDate" name="startDate" required>
+        </div>
+        <div>
+          <label>End Date:</label>
+          <input class="styled-input" nbInput type="date" [(ngModel)]="updateIteration.endDate" name="endDate" required>
+        </div>
+        <div class="dialog-footer">
+          <button nbButton type="submit">Update Iteration</button>
+          <button nbButton type="button" (click)="closeUpdateDialog()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

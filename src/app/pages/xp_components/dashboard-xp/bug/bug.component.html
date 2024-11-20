@@ -1,0 +1,120 @@
+<!-- Main Component HTML -->
+<h1>The Bugs</h1>
+<div  class="button-container">
+  <button nbButton status="success" (click)="openAddBugForm()">Add New Bug</button>
+</div>
+<br>
+<div class="bug-list">
+  <nb-card size="small" *ngFor="let bug of bugs" class="bug-card">
+    <nb-card-header>
+      <h4>{{ bug.title }}</h4>
+      <span [ngClass]="getStatusColor(bug.status)" class="bug-status">{{ bug.status }}</span>
+    </nb-card-header>
+    <nb-card-body>
+      <nb-progress-bar [value]="bug.progress" (click)="showAlert(bug)">
+        <span>{{ bug.progress }}%</span>
+      </nb-progress-bar>
+      <p>{{ bug.description }}</p>
+      <div class="d-flex flex-column align-items-end mt-5">
+        <div class="card-actions mb-2">
+          <button nbButton status="primary" (click)="selectBug(bug)">Details</button>
+        </div>
+        <div class="card-actions mb-2">
+          <button nbButton status="success" (click)="selectBugForUpdate(bug)">Update</button>
+        </div>
+        <div class="card-actions mb-2">
+          <button nbButton status="danger" (click)="deleteBug(bug.id)">Delete</button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Add Bug Form Dialog -->
+<div *ngIf="showAddBugForm" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>Create New Bug</h2>
+     </div>
+     <nb-card>
+  <nb-card-body>
+    <form (ngSubmit)="addBugAndAssignBugToTask()">
+      <div class="form-group">
+      <input nbInput class="styled-input" placeholder="Title" [(ngModel)]="newBug.title" name="title" required />
+      <textarea nbInput class="styled-input" placeholder="Description" [(ngModel)]="newBug.description" name="description" required></textarea>
+      <select nbSelect class="styled-input" placeholder="Status" [(ngModel)]="newBug.status" name="status" required>
+        <option value="OPEN">OPEN</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="CLOSED">CLOSED</option>
+      </select>
+      <input nbInput class="styled-input" type="number" placeholder="Progress" [(ngModel)]="newBug.progress" name="progress" required />
+      <select nbSelect class="styled-input" placeholder="Select Task" [(ngModel)]="selectedTaskId" name="taskId" required>
+        <option *ngFor="let task of tasks" [value]="task.id">{{ task.title }}</option>
+      </select>
+      <div>
+        <button nbButton status="success" type="submit">Add Bug</button>
+        <button nbButton status="basic" (click)="cancelAddBug()">Cancel</button>
+      </div>
+    </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+  </div>
+</div>
+<!-- Update Bug Form Dialog -->
+<div *ngIf="showUpdateBugForm && selectedBugForUpdate" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>update Bug</h2>
+     </div>
+     <nb-card>
+  <nb-card-body>
+    <form (ngSubmit)="updateBug()">
+      <input nbInput class="styled-input" placeholder="Title" [(ngModel)]="selectedBugForUpdate.title" name="title" required />
+      <textarea nbInput class="styled-input" placeholder="Description" [(ngModel)]="selectedBugForUpdate.description" name="description" required></textarea>
+      <select nbSelect class="styled-input" placeholder="Status" [(ngModel)]="selectedBugForUpdate.status" name="status" required>
+        <option value="OPEN">OPEN</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="CLOSED">CLOSED</option>
+      </select>
+      <input nbInput class="styled-input" type="number" placeholder="Progress" [(ngModel)]="selectedBugForUpdate.progress" name="progress" required />
+      <div>
+        <button nbButton status="primary" type="submit">Update Bug</button>
+        <button nbButton status="basic" (click)="cancelUpdate()">Cancel</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+  </div>
+</div>
+<!-- Bug Details Sidebar -->
+<div *ngIf="showBugSidebar && selectedBug" class="sidebar-overlay">
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <h2>Task Details</h2>
+      <button nbButton status="basic" (click)="closeBugSidebar()">Close</button>
+    </div>
+    <div class="sidebar-body">
+      <div class="details-item">
+        <nb-icon icon="file-text-outline"></nb-icon>
+        <p><strong>Title:</strong> {{ selectedBug.title }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="activity-outline"></nb-icon>
+        <span>{{ selectedBug.progress }}%</span>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="clipboard-outline"></nb-icon>
+        <p><strong>Description:</strong> {{ selectedBug.description }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="checkmark-circle-outline"></nb-icon>
+        <p><strong>Status:</strong> {{ selectedBug.status  | titlecase }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="calendar-outline"></nb-icon>
+        <p><strong>Assigned Task :</strong> {{ selectedBugTask.title || 'Not Assigned' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

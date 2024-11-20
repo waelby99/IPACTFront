@@ -1,0 +1,130 @@
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.iteration-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px; /* Larger margin for better positioning */
+}
+
+.iteration-selector label {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+  font-weight: bold;
+}
+
+.iteration-selector select {
+  padding: 15px 20px;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: all 0.4s ease-in-out; /* More pronounced transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Initial shadow */
+  cursor: pointer; /* Change cursor to pointer */
+  transform: scale(1); /* Initial scale */
+}
+
+.iteration-selector select:hover {
+  border-color: #0056b3;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Larger shadow on hover */
+  background-color: #e9f1ff; /* Light background color on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.iteration-selector select:focus {
+  border-color: #0056b3;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  background-color: #e9f1ff; /* Light background color on focus */
+  transform: scale(1.05); /* Slightly larger on focus */
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.dashboard-card {
+  border-radius: 10px; /* Slightly larger border radius */
+  padding: 10px; /* Increase padding for larger content area */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 150px; /* Increased height */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center content */
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px); /* More pronounced hover effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.icon {
+  font-size: 48px; /* Larger icon size */
+}
+
+.value {
+  font-size: 1.5rem; /* Larger value text */
+  font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Color Schemes for Cards */
+.card-blue {
+  background-color: #007bff;
+}
+
+.card-green {
+  background-color: #28a745;
+}
+
+.card-yellow {
+  background-color: #ffc107;
+}
+
+.card-red {
+  background-color: #dc3545;
+}
+
+.card-purple {
+  background-color: #6f42c1;
+}
+
+.echart {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px; /* Increased padding */
+  background-color: #fff;
+  border-radius: 15px; /* Larger border radius */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.echart:hover {
+  transform: translateY(-6px); /* More pronounced hover effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+@media (max-width: 768px) {
+  .echart {
+    height: 400px; /* Adjust height for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .echart {
+    height: 250px; /* Further adjust height for very small screens */
+  }
+}

@@ -1,0 +1,59 @@
+<div class="dashboard">
+  <!-- Total User Stories Card -->
+  <nb-card class="total-user-stories-card">
+    <nb-card-body>
+      <div class="card-content">
+        <div class="icon">
+          <!-- You can replace this with an appropriate icon -->
+          <nb-icon icon="activity"></nb-icon>
+        </div>
+        <div class="details">
+          <div class="title">Total User Stories</div>
+          <div class="status">{{ totalUserStories }}</div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <!-- Status Distribution Chart -->
+    <nb-card class="chart-card">
+      <nb-card-header>
+        <div class="header-content">
+          <nb-icon icon="pie-chart"></nb-icon>
+          <h3>Status Distribution</h3>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div echarts [options]="statusChartOptions" class="chart"></div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Priority Distribution Chart -->
+    <nb-card class="chart-card">
+      <nb-card-header>
+        <div class="header-content">
+          <nb-icon icon="star"></nb-icon>
+          <h3>Priority Distribution</h3>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div echarts [options]="priorityChartOptions" class="chart"></div>
+      </nb-card-body>
+    </nb-card>
+    
+    <!-- Average Tasks Chart -->
+    <nb-card class="chart-card">
+      <nb-card-header>
+        <div class="header-content">
+          <nb-icon icon="bar-chart"></nb-icon>
+          <h3>Average Tasks</h3>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div echarts [options]="averageTasksChartOptions" class="chart"></div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

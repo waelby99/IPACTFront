@@ -1,0 +1,81 @@
+<div class="xp-methodology">
+  <!-- Title Section -->
+  <div class="title-section">
+    <h1>Extreme Programming (XP) Dashboard</h1>
+    <p>🚀 Elevate Your Development Process with <span class="highlight">XP Practices</span> 🚀</p>
+    <button class="start-xp-button">Start Learning XP →</button>
+  </div>
+
+
+  <!-- Main Tabset -->
+  <nb-tabset fullWidth>
+    <nb-tab tabTitle="Dashboard">
+      <div class="dashboard">
+        
+        <div class="container">
+          <h2>kpi-Iteration</h2>     
+          <ngx-kpi-iteration></ngx-kpi-iteration>
+        </div>
+        <div class="container">
+          <h2>kpi-UserStory</h2>     
+          <ngx-kpi-user-stories></ngx-kpi-user-stories>
+        </div>
+        <div class="container">
+          <h2>kpi-Task</h2>     
+        <ngx-kpi-task></ngx-kpi-task>
+        </div>
+        <div class="container">
+          <h2>kpi-Bugs</h2>      
+          <ngx-kpi-bugs></ngx-kpi-bugs>
+      </div>
+      </div>
+      
+    </nb-tab>
+    <nb-tab tabTitle="Impl">
+      <nb-stepper>
+        <nb-step label="GantChart">
+          <div class="tabset-container">
+            <nb-tabset fullWidth>
+             <nb-tab icon="book-outline" tabTitle="Gant Chart">
+                <ngx-gantt-chart></ngx-gantt-chart>
+              </nb-tab>
+            </nb-tabset>
+            
+          </div>
+        </nb-step>
+        
+        <!-- Release Plan Section -->
+        <nb-step label="Release Plan">
+          <div class="tabset-container">
+            <nb-tabset fullWidth>
+              <nb-tab icon="calendar-outline" tabTitle="Iteration">
+                <ngx-iteration></ngx-iteration>
+              </nb-tab>
+              <nb-tab icon="book-outline" tabTitle="User Story">
+                <ngx-user-story></ngx-user-story>
+              </nb-tab>
+              <nb-tab icon="list-outline" tabTitle="Task">
+                <ngx-task></ngx-task>
+              </nb-tab>
+            </nb-tabset>
+          </div>
+        </nb-step>
+      
+        <!-- Refactoring Section -->
+        <nb-step label="Refactoring">
+          <div class="tabset-container">
+            <nb-tabset fullWidth>
+              <nb-tab tabTitle="Code Bug">
+                <ngx-bug></ngx-bug>
+              </nb-tab>
+            </nb-tabset>
+          </div>
+        </nb-step>
+      </nb-stepper>
+    </nb-tab>
+  </nb-tabset>
+
+
+
+ 
+</div>

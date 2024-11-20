@@ -1,0 +1,85 @@
+<!-- Benefits Section -->
+<section class="mt-5">
+  <h2>Benefits</h2>
+
+  <!-- Add Benefit Button -->
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="openAddBenefitForm()">Add New Benefit</button>
+  </div>
+
+  <!-- Benefits List -->
+  <div class="row">
+    <div class="col-md-4" *ngFor="let benefit of benefits">
+      <nb-card size="small">
+        <nb-card-header>
+          <h4 class="text-center">{{ benefit.name }}</h4>
+        </nb-card-header>
+        <nb-card-body>
+          <img [src]="getBenefitImageUrl(benefit)" alt="{{ benefit.name }} Image" class="img-fluid">
+          <p class="ml-4 mt-4"><strong>{{ benefit.description }}</strong></p>
+          <div class="d-flex justify-content-end mt-5">
+            <button nbButton size="small" (click)="openEditBenefitForm(benefit)">Edit</button>
+            <button nbButton size="small" status="danger" (click)="deleteBenefit(benefit.id)">Delete</button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <!-- Add Benefit Card (Popup) -->
+  <div class="backdrop" *ngIf="isAddBenefitCardVisible"></div>
+  <nb-card *ngIf="isAddBenefitCardVisible" class="dialog-card">
+    <nb-card-header>Add New Benefit</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="addBenefitForm" (ngSubmit)="saveNewBenefit()" class="add-form">
+        <div class="form-group">
+          <label for="add-name">Name</label>
+          <input nbInput fullWidth formControlName="name" id="add-name" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label for="add-description">Description</label>
+          <textarea nbInput fullWidth formControlName="description" id="add-description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-file">Image</label>
+          <input nbInput type="file" id="add-file" (change)="onFileChange($event)" />
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button nbButton status="primary" size="small" type="submit">Save</button>
+          <button nbButton status="basic" size="small" type="button" (click)="closeAddBenefitCard()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Edit Benefit Card (Popup) -->
+  <div class="backdrop" *ngIf="isEditBenefitCardVisible"></div>
+  <nb-card *ngIf="isEditBenefitCardVisible" class="dialog-card">
+    <nb-card-header>Edit Benefit</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editBenefitForm" (ngSubmit)="saveEditedBenefit()">
+        <input type="hidden" formControlName="id">
+        <div class="form-group">
+          <label for="editName">Name</label>
+          <input nbInput fullWidth formControlName="name" id="editName" placeholder="Enter name" required />
+        </div>
+        <div class="form-group">
+          <label for="editDescription">Description</label>
+          <textarea nbInput fullWidth formControlName="description" id="editDescription" placeholder="Enter description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editFile">Image File</label>
+          <input nbInput type="file" id="editFile" (change)="onFileChange($event)" />
+        </div>
+        <div class="form-group" *ngIf="editImageUrl">
+          <label for="currentImage">Current Image</label>
+          <img [src]="editImageUrl" class="img-fluid current-image" alt="Benefit Image">
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button nbButton status="primary" type="submit">Save Changes</button>
+          <button nbButton status="basic" type="button" (click)="closeEditBenefitCard()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</section>

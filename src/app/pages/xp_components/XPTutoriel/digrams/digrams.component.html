@@ -1,0 +1,68 @@
+<div class="xp-methodology">
+  <div class="title-section">
+    <h1>Diagrams</h1>
+    <button nbButton status="success" (click)="openAddDiagramForm()">Add New Diagram</button>
+  </div>
+
+  <!-- Add Diagram Form -->
+  <nb-card *ngIf="isAddDialogOpen" class="popup-window">
+    <nb-card-header>Add New Diagram</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="addDiagramForm" (ngSubmit)="saveNewDiagram()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="form-group">
+          <label for="file">Image File</label>
+          <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)" formControlName="file">
+        </div>
+        <div class="form-buttons">
+          <button nbButton type="submit" status="primary" size="small">Save</button>
+          <button nbButton status="basic" size="small" type="button" (click)="closeDialog()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Edit Diagram Form -->
+  <nb-card *ngIf="isEditDialogOpen" class="popup-window">
+    <nb-card-header>Edit Diagram</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editDiagramForm" (ngSubmit)="saveEditedDiagram()">
+        <input type="hidden" formControlName="id">
+        <div class="form-group">
+          <label for="edit-name">Name</label>
+          <input type="text" class="form-control" id="edit-name" formControlName="name">
+        </div>
+        <div class="form-group">
+          <label for="edit-file">Image File</label>
+          <input type="file" class="form-control-file" id="edit-file" (change)="onFileChange($event)">
+        </div>
+        <div class="form-group" *ngIf="editImageUrl">
+          <label for="currentImage">Current Image</label>
+          <img *ngIf="editImageUrl" [src]="editImageUrl" alt="Current Diagram Image" class="current-image">
+        </div>
+        <div class="form-buttons">
+          <button nbButton type="submit" status="primary" size="small">Save Changes</button>
+          <button nbButton status="basic" size="small" type="button" (click)="closeDialog()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+
+  <div class="diagrams-container">
+    <nb-card *ngFor="let diagram of diagrams">
+      <nb-card-header>
+        <div>{{ diagram.name }}</div>
+      </nb-card-header>
+      <nb-card-body>
+        <img [src]="getDiagramImageUrl(diagram)" alt="{{ diagram.name }}" class="diagram-image" />
+        <div class="diagram-actions">
+          <button nbButton status="info" (click)="openEditDiagramForm(diagram)">Edit</button>
+          <button nbButton status="danger" (click)="deleteDiagram(diagram.id)">Delete</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

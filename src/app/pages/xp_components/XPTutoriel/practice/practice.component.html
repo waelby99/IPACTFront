@@ -1,0 +1,91 @@
+<section class="mt-5">
+  <h2>The Practices</h2>
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="openAddPracticeDialog()">Add New Practice</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Definition</th>
+          <th>Benefits</th>
+          <th>Challenges</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let practice of practices">
+          <td>{{ practice.name }}</td>
+          <td>{{ practice.definition }}</td>
+          <td>{{ practice.benefits.join(', ') }}</td>
+          <td>{{ practice.challenges.join(', ') }}</td>
+          <td>
+            <button nbButton size="small" status="info" (click)="openEditPracticeDialog(practice)">Edit</button>
+            <button nbButton size="small" status="danger" (click)="deletePractice(practice.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Add Practice Dialog -->
+<div *ngIf="isAddPracticeVisible" class="dialog-overlay">
+  <nb-card class="dialog-card add-dialog">
+    <nb-card-header>
+      <div class="dialog-header-title">Add New Practice</div>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="addPracticeForm" (ngSubmit)="saveNewPractice()">
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <textarea nbInput fullWidth formControlName="definition" placeholder="Definition"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="benefits" placeholder="Benefits (comma-separated)">
+        </div>
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="challenges" placeholder="Challenges (comma-separated)">
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button nbButton status="primary" size="small" type="submit">Save</button>
+          <button nbButton status="basic" size="small" type="button" (click)="closeAddPracticeDialog()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Edit Practice Dialog -->
+<div *ngIf="isEditPracticeVisible" class="dialog-overlay">
+  <nb-card class="dialog-card edit-dialog">
+    <nb-card-header>
+      <div class="dialog-header-title">Edit Practice</div>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editPracticeForm" (ngSubmit)="saveEditedPractice()">
+        <input type="hidden" formControlName="id" />
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <textarea nbInput fullWidth formControlName="definition" placeholder="Definition"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="benefits" placeholder="Benefits (comma-separated)">
+        </div>
+        <div class="form-group">
+          <input type="text" nbInput fullWidth formControlName="challenges" placeholder="Challenges (comma-separated)">
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button nbButton status="primary" size="small" type="submit">Save Changes</button>
+          <button nbButton status="basic" size="small" type="button" (click)="closeEditPracticeDialog()">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

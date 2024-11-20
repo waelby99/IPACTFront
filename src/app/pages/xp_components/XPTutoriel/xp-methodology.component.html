@@ -1,0 +1,76 @@
+
+<div class="xp-methodology">
+  <!-- Title Section -->
+  <div class="title-section">
+    <h1>Extreme Programming (XP) Guide</h1>
+    <p>🚀 Elevate Your Development Process with <span class="highlight">XP Practices</span> 🚀</p>
+    <button class="start-xp-button" (click)="navigateToDashboard()">Start XP →</button>
+    <button class="delete-xp-info-button" (click)="deleteAllDocuments()" status="danger">Delete XP Information</button>
+
+
+  </div>
+  <!-- First Tabset -->
+   
+  <div class="tabset-container">
+    <h2>Introduction</h2>
+    <nb-tabset class="first-tabset " (changeTab)="Afficher1()">
+        <nb-tab tabTitle="Definitions" [hidden]="affichage1">
+            <ngx-definitions></ngx-definitions>
+        </nb-tab>
+       </nb-tabset>
+  </div>
+  
+  <!-- Second Tabset -->
+  <div class="tabset-container">
+    <h2>WHY</h2>
+    <nb-tabset class="second-tabset"(changeTab)="Afficher2()">
+        <nb-tab tabTitle="Limitations"[hidden]="affichage2">
+            <ngx-limitation></ngx-limitation>
+        </nb-tab>
+        <nb-tab tabTitle="Benefits"[hidden]="affichage2">
+          <ngx-benefits></ngx-benefits>
+      </nb-tab>
+        
+    </nb-tabset>
+  </div>
+  
+  <!-- Third Tabset -->
+  <div class="tabset-container" >
+    <h2>WHAT</h2>
+    <nb-tabset class="third-tabset" (changeTab)="Afficher3()">
+        <nb-tab tabTitle="Key Factors" [hidden]="affichage3">
+            <ngx-keyfactors></ngx-keyfactors>
+        </nb-tab>
+        <nb-tab tabTitle="Practices"[hidden]="affichage3">
+          <ngx-practice></ngx-practice>
+      </nb-tab>
+       
+    </nb-tabset>
+  </div>
+
+   <!-- Third Tabset -->
+   <div class="tabset-container">
+    <h2>HOW</h2>
+    <nb-tabset class="Fourth-tabset" (changeTab)="Afficher4()" >
+      <nb-tab tabTitle="The Implementation" [hidden]="affichage4" >
+        <ngx-implementation></ngx-implementation>
+      </nb-tab>
+        <nb-tab tabTitle="Diagrams" [hidden]="affichage4">
+          <ngx-digrams></ngx-digrams>
+      </nb-tab>
+       
+    </nb-tabset>
+  </div>
+   <!-- Third Tabset -->
+   <div class="tabset-container">
+    <h2>WHAT IF</h2>
+    <nb-tabset class="Fourth-tabset"(changeTab)="Afficher5()">
+      <nb-tab tabTitle="The Impact" [hidden]="affichage5">
+        <ngx-impact></ngx-impact>
+      </nb-tab>
+      
+       
+    </nb-tabset>
+  </div>
+ 
+</div>

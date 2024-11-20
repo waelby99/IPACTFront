@@ -1,0 +1,56 @@
+<section class="mt-5">
+  <h2>The Implementations</h2>
+
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="openAddImplementationForm()">Add New Implementation</button>
+  </div>
+
+  <nb-card>
+    <nb-card-body>
+      <nb-stepper>
+        <nb-step *ngFor="let implementation of implementations">
+          <ng-template nbStepLabel>
+            {{ implementation.name }}
+          </ng-template>
+          <div class="d-flex flex-column align-items-center">
+            <p><strong>{{ implementation.name }}</strong></p>
+            <img *ngIf="implementation.imageUrl" [src]="getImageUrl(implementation.imageUrl)" alt="{{ implementation.name }}" class="img-fluid mb-3">
+            <p><strong>{{ implementation.description }}</strong></p>
+            <div class="d-flex justify-content-end w-100">
+              <button nbButton status="info" size="small" (click)="openEditImplementationForm(implementation)">Edit</button>
+              <button nbButton status="danger" size="small" (click)="deleteImplementation(implementation.id)">Delete</button>
+            </div>
+          </div>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Pop-up Form Card -->
+  <div *ngIf="isFormVisible" class="form-popup-overlay">
+    <nb-card class="form-popup-card">
+      <nb-card-header>
+        <div class="dialog-header-title">
+          {{ currentImplementation ? 'Edit Implementation' : 'Add New Implementation' }}
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="implementationForm" (ngSubmit)="saveImplementation()">
+          <div class="form-group">
+            <input nbInput fullWidth formControlName="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <textarea nbInput fullWidth formControlName="description" placeholder="Description"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="file" (change)="onFileSelected($event)">
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <button nbButton status="primary" size="small" type="submit">{{ currentImplementation ? 'Save Changes' : 'Save' }}</button>
+            <button nbButton status="basic" size="small" type="button" (click)="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <!-- Total Bugs Card -->
+    <div class="col-12 mb-3">
+      <nb-card class="kpi-card">
+        <nb-card-body>
+          <div class="total-bugs-card">
+            <nb-icon icon="alert-circle-outline" class="icon"></nb-icon>
+   
+              <span class="value">{{ totalBugs }}</span>
+     
+            </div>
+       
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <div class="row charts-row">
+    <!-- Task Status Distribution Chart -->
+    <div class="col-12 col-md-6 mb-3 chart-container">
+      <nb-card class="chart-card">
+        <nb-card-header>
+          <nb-icon icon="bar-chart-outline" class="icon"></nb-icon>
+          <h3>Task Status Distribution</h3>
+        </nb-card-header>
+        <nb-card-body>
+          <div echarts [options]="statusChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <!-- Average Bug Progress Chart -->
+    <div class="col-12 col-md-6 mb-3 chart-container">
+      <nb-card class="chart-card">
+        <nb-card-header>
+          <nb-icon icon="trending-up-outline" class="icon"></nb-icon>
+          <h3>Average Bug Progress</h3>
+        </nb-card-header>
+        <nb-card-body>
+          <div echarts [options]="progressChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

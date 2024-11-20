@@ -1,0 +1,67 @@
+<!-- Task Selector -->
+<div class="selector-card">
+  <nb-card>
+    <nb-card-header>
+      <h3>Select Task</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="task-selector">
+        <select nbSelect id="task" (selectedChange)="onTaskChange($event)">
+          <option *ngFor="let task of tasks" [value]="task.id">{{ task.title }}</option>
+        </select>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Metrics Cards Row -->
+<div class="metrics-row">
+  <nb-card class="metrics-card">
+    <nb-card-body>
+      <div class="card-content">
+        <div class="icon">
+          <nb-icon icon="calendar-outline" pack="eva"></nb-icon>
+        </div>
+        <div class="details">
+          <div class="title">Total Tasks</div>
+          <div class="status">{{ totalTasks }}</div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card class="metrics-card">
+    <nb-card-body>
+      <div class="card-content">
+        <div class="icon">
+          <nb-icon icon="alert-circle-outline" pack="eva"></nb-icon>
+        </div>
+        <div class="details">
+          <div class="title">Bugs Count</div>
+          <div class="status">{{ bugsCount }}</div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Charts Row -->
+<div class="charts-row">
+  <nb-card class="chart-card">
+    <nb-card-header>
+      <h3>Task Count by Status</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <div echarts [options]="taskCountChartOptions" class="chart"></div>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card class="chart-card">
+    <nb-card-header>
+      <h3>Bugs in Incomplete Tasks</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <div echarts [options]="bugsInIncompleteTasksChartOptions" class="chart"></div>
+    </nb-card-body>
+  </nb-card>
+</div>

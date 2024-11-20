@@ -1,0 +1,17 @@
+.echart {
+  width: 100%;
+  height: 500px; /* Increased height for better visibility */
+  
+}
+
+@media (max-width: 768px) {
+  .echart {
+    height: 400px; /* Adjusted for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .echart {
+    height: 300px; /* Adjusted for extra small screens */
+  }
+}

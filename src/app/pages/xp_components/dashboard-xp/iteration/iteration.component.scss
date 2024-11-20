@@ -1,0 +1,221 @@
+.iterations-section {
+  margin-bottom: 20px;
+}
+
+.iterations-section h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  margin-bottom: 20px;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.assign-card, .manage-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.card-header {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.card-body {
+  padding: 10px 0;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Darker background for better contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for a lifted look */
+  width: 90%;
+  max-width: 600px;
+  transition: all 0.3s ease-in-out; /* Smooth transition effect */
+  position: relative; /* For positioning close button */
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
+}
+
+.dialog-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #666;
+}
+
+.dialog-body {
+  max-height: 70vh; /* Ensure content is scrollable if it overflows */
+  overflow-y: auto;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.dialog-footer button {
+  margin-left: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+
+select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+
+select:focus {
+  border-color: #5a67d8;
+  outline: none;
+  box-shadow: 0 0 5px rgba(90, 103, 216, 0.5);
+}
+.styled-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.styled-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.styled-input:hover {
+  border-color: #0056b3;
+}
+
+
+// Add this to your component's SCSS file
+table .nb-icon {
+  font-size: 1.5rem;
+  color: #007bff; // Change the color as needed
+
+  &:hover {
+    color: #0056b3; // Darker shade on hover
+  }
+}
+
+.alert-container {
+  margin-bottom: 20px;
+}
+
+.nb-alert {
+  margin: 10px 0; /* Space between multiple alerts */
+  padding: 15px; /* Padding inside alert */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.nb-alert.success {
+  background-color: #d4edda; /* Green background for success */
+  color: #155724; /* Dark green text */
+  border: 1px solid #c3e6cb; /* Light green border */
+}
+
+.nb-alert.danger {
+  background-color: #f8d7da; /* Red background for danger */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Light red border */
+}
+
+.nb-alert.info {
+  background-color: #d1ecf1; /* Blue background for info */
+  color: #0c5460; /* Dark blue text */
+  border: 1px solid #bee5eb; /* Light blue border */
+}
+
+.nb-alert.warning {
+  background-color: #fff3cd; /* Yellow background for warning */
+  color: #856404; /* Dark yellow text */
+  border: 1px solid #ffeeba; /* Light yellow border */
+}

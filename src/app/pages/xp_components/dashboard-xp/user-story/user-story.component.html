@@ -1,0 +1,191 @@
+<!-- User Story Section -->
+<section class="mt-5">
+  <h2>User Stories</h2>
+
+  <!-- Add User Story Button -->
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="showAddDialog()">Add User Story</button>
+  </div>
+
+  <!-- Tabs for Status Filtering -->
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'TO_DO'" (click)="setCurrentTab('TO_DO')">
+          <nb-icon icon="clipboard-outline" class="tab-icon"></nb-icon>
+          To Do
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'IN_PROGRESS'" (click)="setCurrentTab('IN_PROGRESS')">
+          <nb-icon icon="activity-outline" class="tab-icon"></nb-icon>
+          In Progress
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'DONE'" (click)="setCurrentTab('DONE')">
+          <nb-icon icon="checkmark-circle-outline" class="tab-icon"></nb-icon>
+          Done
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- User Stories List -->
+  <div class="row mt-3">
+    <div class="col-md-4" *ngFor="let userStory of userStories | filterByStatus:currentTab">
+      <nb-card size="small" [ngStyle]="{'background-color': getPriorityColor(userStory.priority)}">
+        <nb-card-header>{{ userStory.title }}</nb-card-header>
+        <nb-card-body>
+          <p>{{ userStory.description }}</p>
+          <p>{{ userStory.priority }}</p>
+          <div class="d-flex flex-column align-items-end mt-5">
+            <div class="card-actions mb-2">
+              <button nbButton status="info" (click)="showDetailsSidebar(userStory)">View </button>
+            </div>
+            <div class="card-actions mb-2">
+              <button nbButton status="danger" (click)="deleteUserStory(userStory.id!)">Delete</button>
+            </div>
+            <div class="card-actions mb-2">
+              <button nbButton status="warning" (click)="showEditDialog(userStory)">Edit</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</section>
+
+<!-- Sliding Sidebar for User Story Details -->
+<!-- User Story Details Sidebar -->
+<!-- Sidebar Overlay -->
+<div *ngIf="showSidebar && selectedUserStory" class="sidebar-overlay">
+  <div class="sidebar-content" >
+    <div class="sidebar-header">
+      <h2>User Story Details</h2>
+      <button nbButton status="basic" (click)="closeSidebar()">Close</button>
+    </div>
+    <div class="sidebar-body">
+      <div class="details-item">
+        <nb-icon icon="file-text-outline"></nb-icon>
+        <p><strong>Title:</strong> {{ selectedUserStory.title }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="clipboard-outline"></nb-icon>
+        <p><strong>Description:</strong> {{ selectedUserStory.description }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="star-outline"></nb-icon>
+        <p><strong>Priority:</strong> {{ selectedUserStory.priority | titlecase }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="checkmark-circle-outline"></nb-icon>
+        <p><strong>Status:</strong> {{ selectedUserStory.status | titlecase }}</p>
+      </div>
+      <div class="details-item">
+        <nb-icon icon="calendar-outline"></nb-icon>
+        <p><strong>Assigned Iteration:</strong> {{ userStoryIteration.title || 'Not Assigned' }}</p>
+      </div>
+      <div class="details-item" *ngIf="userStoryTasks.length > 0">
+        <nb-icon icon="activity-outline"></nb-icon>
+        <h3>Assigned Tasks</h3>
+        <ul>
+         <li *ngFor="let task of userStoryTasks">{{ task.title }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Add User Story Dialog -->
+<div *ngIf="showDialog && isAddingIteration" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>Create User Story</h2>
+      <button nbButton status="basic" (click)="closeDialog()">Close</button>
+    </div>
+    <nb-card>
+      <nb-card-body>
+        <form (ngSubmit)="addUserStory()">
+          <div>
+            <label>Title:</label>
+            <input nbInput class="styled-input" [(ngModel)]="newUserStory.title" name="title" required>
+          </div>
+          <div>
+            <label>Description:</label>
+            <textarea nbInput class="styled-input" [(ngModel)]="newUserStory.description" name="description"></textarea>
+          </div>
+          <div>
+            <label>Status:</label>
+            <select nbSelect class="styled-input" [(ngModel)]="newUserStory.status" name="status">
+              <option *ngFor="let status of UserStoryStatus | keyvalue" [value]="status.value">
+                {{ status.key }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label>Priority:</label>
+            <select nbSelect class="styled-input" [(ngModel)]="newUserStory.priority" name="priority">
+              <option *ngFor="let priority of UserStoryPriority | keyvalue" [value]="priority.value">
+                {{ priority.key }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label>Iteration:</label>
+            <select nbSelect class="styled-input" [(ngModel)]="selectedIterationId" name="iteration">
+              <option *ngFor="let iteration of iterations" [value]="iteration.id">
+                {{ iteration.title }}
+              </option>
+            </select>
+          </div>
+          <button nbButton type="submit">Add User Story</button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<!-- Edit User Story Dialog -->
+<div *ngIf="showDialog && !isAddingIteration && editingUserStory" class="dialog-overlay">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>Edit User Story</h2>
+      <button nbButton status="basic" (click)="closeDialog()">Close</button>
+    </div>
+    <nb-card>
+      <nb-card-body>
+        <form (ngSubmit)="updateUserStory()">
+          <div>
+            <label>Title:</label>
+            <input nbInput class="styled-input" [(ngModel)]="editingUserStory.title" name="title" required>
+          </div>
+          <div>
+            <label>Description:</label>
+            <textarea nbInput class="styled-input" [(ngModel)]="editingUserStory.description" name="description"></textarea>
+          </div>
+          <div>
+            <label>Status:</label>
+            <select nbSelect class="styled-input" [(ngModel)]="editingUserStory.status" name="status">
+              <option *ngFor="let status of UserStoryStatus | keyvalue" [value]="status.value">
+                {{ status.key }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label>Priority:</label>
+            <select nbSelect class="styled-input" [(ngModel)]="editingUserStory.priority" name="priority">
+              <option *ngFor="let priority of UserStoryPriority | keyvalue" [value]="priority.value">
+                {{ priority.key }}
+              </option>
+            </select>
+          </div>
+         
+          <button nbButton type="submit">Update User Story</button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="container">
+  <!-- Tabs for filtering tasks -->
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'TO_DO'" (click)="setCurrentTab('TO_DO')">
+          <nb-icon icon="clipboard-outline" class="tab-icon"></nb-icon>
+          To Do
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'IN_PROGRESS'" (click)="setCurrentTab('IN_PROGRESS')">
+          <nb-icon icon="activity-outline" class="tab-icon"></nb-icon>
+          In Progress
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="currentTab === 'DONE'" (click)="setCurrentTab('DONE')">
+          <nb-icon icon="checkmark-circle-outline" class="tab-icon"></nb-icon>
+          Done
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <button nbButton status="primary" (click)="openAddTaskDialog()">Add Task</button>
+
+  <!-- Add Task Form Dialog -->
+  <div *ngIf="showAddTaskDialog" class="dialog-overlay">
+    <nb-card>
+      <nb-card-header>Create Task</nb-card-header>
+      <nb-card-body>
+        <form (ngSubmit)="createTask()">
+          <input nbInput class="styled-input" placeholder="Title" [(ngModel)]="newTask.title" name="title" required />
+          <textarea nbInput class="styled-input" placeholder="Description" [(ngModel)]="newTask.description" name="description" required></textarea>
+          <br>
+          <select nbSelect fullWidth class="styled-input" [(ngModel)]="newTask.status" name="status" placeholder="Status" required>
+            <option value="TO_DO">To Do</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
+          </select>
+          <br>
+          <label>Select User Story:</label>
+          <select nbSelect fullWidth class="styled-input" [(ngModel)]="selectedUserStoryId" name="userStory" required>
+            <option *ngFor="let userStory of userStories" [value]="userStory.id">{{ userStory.title }}</option>
+          </select>
+          <div>
+            <button nbButton status="success" type="submit">Create</button>
+            <button nbButton status="basic" (click)="showAddTaskDialog = false">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <!-- Edit Task Form Dialog -->
+  <div *ngIf="showEditTaskDialog" class="dialog-overlay">
+    <nb-card>
+      <nb-card-header>Edit Task</nb-card-header>
+      <nb-card-body>
+        <form (ngSubmit)="updateTask()">
+          <div>
+            <label>Title:</label>
+          <input nbInput class="styled-input" placeholder="Title" [(ngModel)]="selectedTask.title" name="title" required />
+          </div>
+          <div>
+            <label>Description:</label>
+          <textarea nbInput class="styled-input" placeholder="Description" [(ngModel)]="selectedTask.description" name="description" required></textarea>
+          </div>
+          <div>
+            <label>Status:</label>
+          <select nbSelect fullWidth class="styled-input" [(ngModel)]="selectedTask.status" name="status" placeholder="Status" required>
+            <option value="TO_DO">To Do</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
+          </select>
+          </div>
+          <br>
+        
+          <div>
+            <button nbButton status="success" type="submit">Update</button>
+            <button nbButton status="basic" (click)="showEditTaskDialog = false">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <!-- Task List -->
+  <div class="tab-content mt-3">
+    <div  class="task-list" *ngFor="let task of tasks | filter:currentTab">
+      <nb-flip-card >
+        <nb-card-front>
+          <nb-card>
+            <nb-card-header>{{ task.title }}</nb-card-header>
+            <nb-card-body>
+              {{ task.description }}
+            </nb-card-body>
+          </nb-card>
+        </nb-card-front>
+        <nb-card-back>
+          <nb-card>
+            <nb-card-body>
+              <button nbButton status="info" (click)="showDetailsSidebar(task)">View</button>
+              <button nbButton status="success" (click)="openEditTaskDialog(task)">Edit</button>
+              <button nbButton status="danger" (click)="deleteTask(task.id)">Delete</button>
+            </nb-card-body>
+          </nb-card>
+        </nb-card-back>
+      </nb-flip-card>
+    </div>
+    <!-- Similar structure for IN_PROGRESS and DONE tabs -->
+  </div>
+
+  <!-- Task Details Sidebar -->
+  <div *ngIf="showSidebar && selectedTask" class="sidebar-overlay">
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h2>Task Details</h2>
+        <button nbButton status="basic" (click)="closeSidebar()">Close</button>
+      </div>
+      <div class="sidebar-body">
+        <div class="details-item">
+          <nb-icon icon="file-text-outline"></nb-icon>
+          <p><strong>Title:</strong> {{ selectedTask.title }}</p>
+        </div>
+        <div class="details-item">
+          <nb-icon icon="clipboard-outline"></nb-icon>
+          <p><strong>Description:</strong> {{ selectedTask.description }}</p>
+        </div>
+        <div class="details-item">
+          <nb-icon icon="checkmark-circle-outline"></nb-icon>
+          <p><strong>Status:</strong> {{ selectedTask.status | titlecase }}</p>
+        </div>
+        <div class="details-item">
+          <nb-icon icon="calendar-outline"></nb-icon>
+          <p><strong>Assigned User Story:</strong> {{ userStoryTitle || 'Not Assigned' }}</p>
+        </div>
+        <div class="details-item" *ngIf="bugs.length > 0">
+          <h3>Bugs</h3>
+          <ul>
+            <li *ngFor="let bug of bugs">{{ bug.title }} - {{ bug.status | titlecase }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

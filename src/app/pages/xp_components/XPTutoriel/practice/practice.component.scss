@@ -1,0 +1,139 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid #dee2e6;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  
+    td {
+      vertical-align: middle;
+    }
+  
+    .actions-column {
+      width: 100px; /* Adjust as needed */
+      text-align: center;
+    }
+   /* practice.component.scss */
+
+/* General dialog card styles */
+      
+}
+  
+/* practice.component.scss */
+
+/* General dialog card styles */
+nb-checkbox {
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+  
+  .form-inline > * {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+  
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it is on top */
+  }
+  
+  .dialog-card {
+    width: 90%;
+    max-width: 600px; /* Set a max-width to keep the card from being too wide */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    overflow: hidden; /* Ensure content does not overflow */
+  }
+  
+  .add-dialog {
+    background-color: #f9f9f9; /* Light background color */
+  }
+  
+  .edit-dialog {
+    background-color: #fff; /* White background color */
+  }
+  
+  .nb-card-header {
+    background-color: #3f51b5; /* Primary color for the header */
+    color: white; /* White text color */
+    padding: 16px; /* Add some padding */
+    border-bottom: 1px solid #ddd; /* Light border below header */
+  }
+  
+  .dialog-header-title {
+    font-size: 1.25rem; /* Larger title font size */
+    font-weight: 600; /* Bold title */
+  }
+  
+  .nb-card-body {
+    padding: 24px; /* Add padding inside the card body */
+  }
+  
+  .form-group {
+    margin-bottom: 16px; /* Space between form fields */
+  }
+  
+  input[nbInput], textarea[nbInput] {
+    border-radius: 4px; /* Rounded input fields */
+    border: 1px solid #ddd; /* Light border */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+    padding: 8px; /* Padding inside input fields */
+  }
+  
+  textarea[nbInput] {
+    min-height: 100px; /* Minimum height for the textarea */
+  }
+  
+  button[nbButton] {
+    border-radius: 4px; /* Rounded button corners */
+  }
+  
+  button[nbButton][status="primary"] {
+    background-color: #3f51b5; /* Primary button color */
+    color: white; /* White text color */
+  }
+  
+  button[nbButton][status="basic"] {
+    background-color: #f5f5f5; /* Light background for cancel button */
+    color: #333; /* Dark text color */
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-end {
+    justify-content: flex-end;
+  }
+  
+  .mt-3 {
+    margin-top: 16px; /* Space above buttons */
+  }
+  
+  .d-flex.justify-content-end.mt-3 {
+    margin-top: 24px; /* Additional space for button row */
+  }
+  
+  

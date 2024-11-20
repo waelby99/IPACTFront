@@ -1,0 +1,77 @@
+<section class="mt-5">
+  <h2>Limitations</h2>
+
+  <!-- Add Limitation Button -->
+  <div class="d-flex justify-content-end mb-4">
+    <button nbButton size="small" status="success" (click)="openAddLimitationForm()">Add New Limitation</button>
+  </div>
+
+  <!-- Limitations List -->
+  <div class="row">
+    <div class="col-md-4" *ngFor="let limitation of limitations">
+      <nb-card size="small">
+        <nb-card-body>
+          <img [src]="getLimitationImageUrl(limitation)" class="img-fluid" alt="Limitation Image">
+          <p class="ml-4 mt-4"><strong>{{ limitation.description }}</strong></p>
+          <button nbButton status="primary" size="small" (click)="openEditLimitationForm(limitation)">Edit</button>
+          <button nbButton status="danger" size="small" class="ml-2" (click)="deleteLimitation(limitation.id)">Delete</button>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</section>
+
+<!-- Custom Modal for Add Limitation -->
+<div *ngIf="isAddFormVisible" class="custom-modal">
+  <div class="custom-modal-content">
+    <nb-card>
+      <nb-card-header>Add New Limitation</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="addLimitationForm" (ngSubmit)="saveNewLimitation()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="file">Image File</label>
+            <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)" formControlName="file">
+          </div>
+          <div class="form-buttons">
+            <button nbButton type="submit" status="primary" size="small">Save</button>
+            <button nbButton status="basic" size="small" type="button" (click)="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<!-- Custom Modal for Edit Limitation -->
+<div *ngIf="isEditFormVisible" class="custom-modal">
+  <div class="custom-modal-content">
+    <nb-card>
+      <nb-card-header>Edit Limitation</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="editLimitationForm" (ngSubmit)="saveEditedLimitation()">
+          <input type="hidden" formControlName="id">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="file">Image File</label>
+            <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)">
+          </div>
+          <div class="form-group" *ngIf="editImageUrl">
+            <label for="currentImage">Current Image</label>
+            <img *ngIf="editImageUrl" [src]="editImageUrl" alt="Current Limitation Image" class="current-image">
+          </div>
+          <div class="form-buttons">
+            <button nbButton type="submit" status="primary" size="small">Save Changes</button>
+            <button nbButton status="basic" size="small" type="button" (click)="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

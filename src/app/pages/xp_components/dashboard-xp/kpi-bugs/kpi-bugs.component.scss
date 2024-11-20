@@ -1,0 +1,130 @@
+.container {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.kpi-card {
+  border-radius: 10px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+}
+
+.total-bugs-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f8f9fa 30%, #e9ecef 100%);
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5eb;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.icon {
+  font-size: 3em;
+  margin-right: 20px;
+  color: #007bff;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.total-bugs-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+
+  .value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+  }
+
+  .label {
+    font-size: 1.2em;
+    color: #6c757d;
+
+    @media (max-width: 768px) {
+      font-size: 1em;
+    }
+  }
+}
+
+.charts-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.chart-container {
+  flex: 1;
+  min-width: 300px; /* Ensure the chart takes up minimum space on small screens */
+}
+
+.chart-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: all 0.4s ease;
+  height: 100%; /* Ensure the chart card takes up the full height */
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+
+  nb-card-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e1e5eb;
+    h3 {
+      margin: 0;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #007bff;
+      transition: color 0.3s ease;
+      &:hover {
+        color: #0056b3;
+      }
+    }
+  }
+
+  .echart {
+    width: 100%;
+    height: 400px; /* Adjust the height to ensure charts are clear and big */
+  }
+}

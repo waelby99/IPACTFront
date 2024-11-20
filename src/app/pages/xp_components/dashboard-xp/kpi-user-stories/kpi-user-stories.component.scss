@@ -1,0 +1,104 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.total-user-stories-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.total-user-stories-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  background-color: #5a67d8; /* Customize the color as needed */
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em; /* Adjusted icon size */
+}
+
+.icon nb-icon {
+  font-size: 1.5em; /* Adjusted icon size */
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  .status {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2d3748;
+  }
+}
+
+
+.charts-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.chart-card {
+  flex: 1;
+  min-width: 300px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.chart-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nb-card-header {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-bottom: 1px solid #e1e5eb;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chart {
+  height: 400px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+}
